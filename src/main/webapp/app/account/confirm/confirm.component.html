@@ -32,9 +32,9 @@
 <!--      </div>-->
 <!--  ####################################################-->
 
-  ************************************************************
 
-  <button class="" (click)="open(mymodal1)">Open My Modal</button>
+
+<!--  <button class="" (click)="open(mymodal1)">Open My Modal</button>-->
   <ng-template #mymodal1 let-modal>
     <div class="modal-header">
       <h4 class="modal-title"><strong>Proceed Payment</strong></h4>
@@ -59,7 +59,6 @@
       </div>
     </div>
   </ng-template>
-  **************************************************  ********************************************
 
 
 
@@ -101,12 +100,19 @@
 
       <br>
       <br>
-      <b><p style="font-weight: bold">Compnay Name</p></b>
+<!--      <b><p style="font-weight: bold">Compnay Name</p></b>-->
+<!--      {{mockDatas.body.name}}-->
+
+<!--      <br>-->
+
+<!--      <b><p  style="font-weight: bold">Date of last payment</p></b>-->
+<!--&lt;!&ndash;      {{message[6]}}&ndash;&gt;-->
+<!--      <br>-->
+
+<!--      <b><p  style="font-weight: bold">Company address</p></b>-->
+<!--      {{mockDatas.body.address}}-->
       <br>
 
-      <b><p>Date of last payment</p></b>
-
-      <br>
 
       <b><p style="font-weight: bold">Payment Amount</p></b>
       {{message[2]}}
@@ -134,9 +140,14 @@
         {{message[5]}}
         <br>
         <br>
-
-        <button class="btn btn-info">Back</button>
+<!--        <button (click)="mockData()">click me</button>-->
+            <button (click)="paypal()" style="margin-left: 210px; margin-top: -50px; white-space: nowrap"  class="btn btn-info">click paypal</button>
+        <button (click)="back()"  class="btn btn-info">Back</button>
         <button (click)="open(mymodal1)"(click)="startTimer()" style="margin-left: 110px; margin-top: -62px; white-space: nowrap"  class="btn btn-info">Proceed to payment</button>
+
+
+
+<!--                <button (click)="mockData()">redirect me</button>-->
 
     </div>
 </div>

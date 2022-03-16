@@ -56,10 +56,6 @@ export class ProcessingPaymentComponent implements OnInit{
   // this.message = this.sharedService.getMessage()
 
 }
-
-  closePage(){
-    window.close()
-  }
   savePayment(): void {
     const payment = new Payment();
     payment.cik = sessionStorage.getItem("cik");
@@ -85,6 +81,9 @@ export class ProcessingPaymentComponent implements OnInit{
   }
   previousState(): void {
     window.history.back();
+  }
+  closePage(){
+    window.close();
   }
 }
 

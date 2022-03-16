@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
@@ -27,6 +27,75 @@ import {PaymentService} from "../../entities/payment/service/payment.service";
 export class submitPaymentComponent implements OnInit {
 
 
+  //frontend
+  doNotMatch = false;
+  error = false;
+  success = false;
+
+
+  // editForm = this.fb.group({
+  //
+  //   cik: [
+  //     '',
+  //     [
+  //       Validators.required,
+  //       Validators.maxLength(10),
+  //       Validators.minLength(10),
+  //       Validators.pattern(/^\S*$/),
+  //       Validators.pattern('^[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$|^[_.@A-Za-z0-9-]+$'),
+  //     ],
+  //   ],
+  //   ccc: [
+  //     '', [
+  //     Validators.required,
+  //     Validators.maxLength(8),
+  //     Validators.minLength(8),
+  //     Validators.pattern(/^\S*$/),
+  //     Validators.pattern(/^[a-zA-Z0-9.,:&apos;&quot;]/)
+  //   ],
+  //   ],
+  //
+  //   payment_amount:[
+  //     '', [
+  //
+  //     Validators.required,
+  //     Validators.pattern(/^[0-9]+(\.?[0-9]+)?$/),
+  //     ],
+  //
+  //   ],
+  //
+  //   nameof: [
+  //     '',[
+  //     Validators.required
+  //   ],
+  //   ],
+  //   email: [
+  //     '',
+  //     [
+  //       Validators.required,
+  //       Validators.minLength(5),
+  //       Validators.maxLength(254),
+  //       Validators.email]],
+  //
+  //   phone: [
+  //     '',
+  //     [
+  //       Validators.required,
+  //       Validators.minLength(10),
+  //       Validators.maxLength(10),
+  //       Validators.pattern(/^[0-9]+(\.?[0-9]+)?$/)]],
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  // })
+
+  //till this frontend
+
   isSaving = false;
   data: any;
   parentPost: any[] = [];
@@ -51,13 +120,54 @@ export class submitPaymentComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    cik: [],
-    ccc: [],
-    payment_amount: [],
-    name: [],
-    email: [],
-    phone: [],
+    cik: [ '',[
+      Validators.required,
+             Validators.maxLength(10),
+           Validators.minLength(10),
+            Validators.pattern(/^\S*$/),
+            Validators.pattern('^[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$|^[_.@A-Za-z0-9-]+$'),
+         ]],
+
+
+    ccc: ['', [
+      Validators.required,
+      Validators.maxLength(8),
+      Validators.minLength(8),
+      Validators.pattern(/^\S*$/),
+      Validators.pattern(/^[a-zA-Z0-9.,:&apos;&quot;]/)
+    ],],
+
+
+    payment_amount: [ '', [
+
+      Validators.required,
+      Validators.pattern(/^[0-9]+(\.?[0-9]+)?$/)
+    ]],
+
+    name: [
+      '',[
+        Validators.required]
+
+    ],
+
+    email: [ '',
+      [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(254),
+        Validators.email]],
+
+    phone: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(10),
+        Validators.pattern(/^[0-9]+(\.?[0-9]+)?$/)]
+    ],
   });
+
+
 
 
   constructor(private http: HttpClient,
@@ -71,11 +181,26 @@ export class submitPaymentComponent implements OnInit {
   }
 
 
+  // check(){
+  //   console.log(this.editForm.get(this.)!.value)
+  // }
+
+
+
+
   close() {
     this.openWindow.close()
 
   }
 
+  clean(){
+    this.editForm.reset();
+  }
+
+  // check(){
+  //   console.log(this.editForm.get(['cik'])!.value)
+  // }
+  //
 
 
 
@@ -116,102 +241,9 @@ export class submitPaymentComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.activatedRoute.data.subscribe(({submit}) => {
-    //   this.updateForm(submit);
-    // });
-    // this.message = this.sharedService.getMessage();
-    //
-    // this.submitService.getHostedPayment().subscribe((result:any)=>{
-    //   this.redirectUrl = result;
-    //   this.String2 = this.redirectUrl.body.partialRedirectUrl;
-    //   this.String3 = this.String1.concat(this.String2.toString());
-    //   // window.location.href= this.String3
-    //   console.log(this.String3)
-    // })
 
-      // this.Url = JSON.stringify(result);
-      // this.String1=JSON.parse(this.Url);
-      // // this.String2 = this.Url.body.partialRedirectUrl;
-      // window.location.href = this.String1.body;
-      // console.log(result)
-      // this.Url = result;
-      //   // this.String2 = this.Url.body.partialRedirectUrl;
-      //   // this.String3 = this.String1.concat(this.String2.toString());
-      //   // // window.location.href = this.String3;
-      //
-      //   // console.log(this.String3)
   }
 
-  // Url2(){
-  //   this.activatedRoute.data.subscribe(({submit}) => {
-  //     this.updateForm(submit);
-  //   });
-  // //   this.message = this.sharedService.getMessage();
-  // //
-  // //   this.submitService.getHostedPayment().subscribe((result:any)=>{
-  // //     this.redirectUrl = result;
-  // //     this.String2 = this.redirectUrl.body.partialRedirectUrl;
-  // //     this.String3 = this.String1.concat(this.String2.toString());
-  // //     // window.location.href= this.String3
-  // //     console.log(this.String3)
-  // //   })
-  //
-  // }
-  //
-  //
-  // redirect(){
-  //   window.location.href = this.String3
-  // }
-
-
-  //
-  // redirect() {
-  //   this.submitService.getHostedPayment().subscribe((result: any) => {
-  //       this.Url = result;
-  //       this.String2 = this.Url.body.partialRedirectUrl;
-  //       this.String3 = this.String1.concat(this.String2.toString());
-  //       this.newUrl = window.location.href = this.String3
-  //     console.log(this.newUrl)
-  //     }
-  //   );
-  // }s
-
-
-
-  // onClose(event: any) {
-  //   console.log(event);
-  // }
-
-  // get() {
-  //   return this.submitService.getUrl()
-  //   }
-  //   console.log(Url)
-  // }
-  getUrl() {
-    this.http.get('/routing').subscribe(
-      response => {
-        this.Url = response;
-        console.log(URL)
-      }
-    )
-  }
-
-//   getUrl(){
-//   this.http.get('http://localhost:8080/routing')
-// .subscribe(response => console.log(response.text()))}
-//   // getU() {
-  //   this.submitService.getUrl('').subscribe((data: any) => {
-  //     console.log(data)
-  //
-  //   })
-
-  // save2(){
-  //   const payment = this.createFromForm()
-  //   this.subscribeToSaveResponse(this.paymentService.create(payment))
-  // }
-  // backupsave(data:any){
-  //
-  // }
   save(data:any): void {
     const payment = this.createFromForms();
     // const submit = this.data();
@@ -274,8 +306,10 @@ export class submitPaymentComponent implements OnInit {
       phone: payment.phone,
     });
   }
-  previousState(): void {
-    window.history.back();
+  // previousState(): void {
+  //   window.history.back();
+  // }
+  previousState(){
   }
 
 

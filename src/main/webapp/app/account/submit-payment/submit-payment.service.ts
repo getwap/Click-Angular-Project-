@@ -7,7 +7,7 @@ import {filter,map} from 'rxjs/operators';
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import {IHostedPayment, HostedPayment, ISubmit, Submit,IPayment,Payment} from './Submit-payment.model';
+import {IHostedPayment, HostedPayment, ISubmit, Submit, IPayment, Payment} from './Submit-payment.model';
 // import {IPayment,Payment} from "../../entities/payment/payment.model";
 
 import {SharedconfirmService} from 'app/shared/sharedconfirm';
@@ -27,6 +27,7 @@ export class SubmitService {
   // private baseUrl = "http://localhost:8080/routing";
   protected Url2 = this.applicationConfigService.getEndpointFor('api/amount')
   protected url = this.applicationConfigService.getEndpointFor('api/routing')
+  protected url3 = this.applicationConfigService.getEndpointFor('api/paypal')
   constructor(private http: HttpClient, private applicationConfigService: ApplicationConfigService, private sharedService: SharedconfirmService ) {}
 
 
@@ -38,6 +39,10 @@ export class SubmitService {
   public getAmount(payment:any){
     return this.http.post(`${this.Url2}`,payment,{responseType:'text' as 'json'})
 
+  }
+
+  getPaypal():any{
+    return this.http.get<String>(`${this.url3}`, {observe:'response'});
   }
 
 

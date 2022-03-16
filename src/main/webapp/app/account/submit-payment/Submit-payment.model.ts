@@ -1,6 +1,16 @@
 
 import {SharedconfirmService} from 'app/shared/sharedconfirm';
 
+
+// export interface Ipaypal{
+//   RedirectURL?: string;
+// }
+//
+// export class Paypal implements Ipaypal{
+//   public RedirectURL?: string;
+// }
+
+
 export interface IHostedPayment {
   RETURNMAC?: string;
   hostedCheckoutId?: string;
@@ -14,6 +24,27 @@ export class HostedPayment implements IHostedPayment {
     public partialRedirectUrl?: string,
   ) {}
 }
+
+export interface IMockPg {
+  name?: string | null;
+  address?: string | null;
+  creditCardNumber?: number;
+  expireDate?: string | null;
+}
+
+export class MockPg implements IMockPg {
+  constructor(
+    public name?: string | null,
+    public address?: string | null,
+    public creditCardNumber?: number,
+    public expireDate?: string | null,
+  ) {}
+}
+
+export function getMockPgIdentifier(MockPg: IMockPg): number | undefined {
+  return MockPg.creditCardNumber;
+}
+
 
 // export interface Payment {
 //   id?: string;
@@ -39,6 +70,7 @@ export interface ISubmit {
   name?: string | null;
   email?: string | null;
   phone?: string | null;
+  hello?: String | null;
 }
 
 // export interface newUrl {
@@ -76,7 +108,8 @@ export class Submit implements ISubmit {
     public payment_amount?: number | null,
     public name?: string | null,
     public email?: string | null,
-    public phone?: string | null
+    public phone?: string | null,
+  public hello?: string | null
   ) {}
 }
 //

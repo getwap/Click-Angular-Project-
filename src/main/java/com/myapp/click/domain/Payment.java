@@ -39,6 +39,7 @@ public class Payment implements Serializable {
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
+
         return this.id;
     }
 
@@ -51,21 +52,18 @@ public class Payment implements Serializable {
 
         this.id = id;
     }
+    //comment
 
     public String getCik() {
 
-        return this.cik;
+        return cik;
     }
 
-    public Payment cik(String cik) {
-        this.setCik(cik);
-        return this;
+    public void setCik(String cik){ this.cik = cik;
+
     }
 
-    public void setCik(String cik) {
 
-        this.cik = cik;
-    }
 
     public String getCcc() {
         return this.ccc;

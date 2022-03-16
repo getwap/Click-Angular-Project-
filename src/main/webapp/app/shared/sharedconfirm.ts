@@ -16,6 +16,7 @@ export class SharedconfirmService {
 
 
 
+
   constructor(private httpClient:HttpClient) {
   }
 
@@ -24,7 +25,9 @@ export class SharedconfirmService {
   payment_amount: any,
   name: any,
   email: any,
-  phone: any){
+  phone: any,
+
+              ){
     this.cik= cik;
     this.ccc= ccc;
     this.payment_amount= payment_amount;
@@ -32,10 +35,12 @@ export class SharedconfirmService {
     this.email= email;
     this.phone= phone;
 
+
+
   }
 
   getMessage(){
-    return new Array(this.cik, this.ccc,this.payment_amount,this.name,this.email,this.phone)
+    return new Array(this.cik, this.ccc,this.payment_amount,this.name,this.email,this.phone);
   }
 
 

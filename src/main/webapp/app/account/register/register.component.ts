@@ -47,6 +47,11 @@ export class RegisterComponent implements AfterViewInit {
     }
   }
 
+  check(){
+    console.log(this.registerForm.get('login')!.value)
+  }
+
+
   register(): void {
     this.doNotMatch = false;
     this.error = false;

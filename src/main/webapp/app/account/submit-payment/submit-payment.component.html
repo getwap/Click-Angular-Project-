@@ -36,7 +36,7 @@
   <p style="position: absolute; left: 190px; font-size:26px; top: 23px;">Your credentials and payment amount</p></div>
 
 <div class="box1 darkwhite" style="position:absolute; left:500px; top:770px;" >
-  <p style="position: absolute; left: 190px; font-size:26px; top: 80px;">Your Contact Information</p></div>
+  <p style="position: relative; left: 190px; font-size:26px; top: 109px;">Your Contact Information</p></div>
 
 <div class="row justify-content-center" style="margin-left: 430px; margin-top: 350px">
   <div class="col-8">
@@ -194,63 +194,167 @@
 
 
     <!--    ******************************************************************-->
+<!--<button (click)="check()">check</button>-->
 
-    <form name="editForm" role="form" novalidate (ngSubmit)="save(editForm.value  )" [formGroup]="editForm" [(ngModel)]="editForm">
-      <h2 id="jhi-payment-heading" data-cy="PaymentCreateUpdateHeading">Create or edit a Payment</h2>
+<!--    <div class="row justify-content-center">-->
+<!--      <div class="col-md-8">-->
+<!--        <form #login name="form" role="form" [formGroup]="testForm" *ngIf="!success">-->
+<!--          <div class="form-group">-->
+<!--            <label class="form-control-label" for="name">Username</label>-->
+<!--            <input-->
+<!--              type="text"-->
+<!--              class="form-control"-->
+<!--              id="name"-->
+<!--              name="name"-->
+<!--              placeholder="Your username"-->
+<!--              formControlName="name"-->
+<!--              data-cy="username"-->
+<!--              #login-->
+<!--            />-->
+<!--            <div *ngIf="testForm.get('name')!.invalid && (testForm.get('name')!.dirty || testForm.get('name')!.touched)">-->
+<!--&lt;!&ndash;              <small class="form-text text-danger" *ngIf="testForm.get('name')?.errors?.required">your username is required</small>&ndash;&gt;-->
+<!--    <div class="form-group" [hidden]="editForm.get('id')!.value == null">-->
+<!--      <label class="form-control-label" for="field_id">ID</label>-->
+<!--      <input type="number"  class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />-->
+<!--    </div>  -->
+
+
+    <form #form name="form" role="form" (ngSubmit)="save(editForm.value)" [formGroup]="editForm" *ngIf="!success">
+
+      <h2>Create or edit a Payment</h2>
 
       <div>
-        <jhi-alert-error></jhi-alert-error>
 
-        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
-          <label class="form-control-label" for="field_id">ID</label>
-          <input type="number"  class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+
+        <div class="form-group">
+          <label class="form-control-label" for="cik">CIK</label>
+          <input style="width: 200px"
+                 type="text"
+                 class="form-control"
+                 id="cik"
+                 name="cik"
+
+                 data-cy="CIK"
+                 formControlName="cik"
+                 #form                   />
+
+          <div *ngIf="editForm.get('cik')!.invalid && (editForm.get('cik')!.dirty || editForm.get('cik')!.touched)">
+            <small class ="form-text text-danger" *ngIf="editForm.get('cik')?.errors?.required">you cik required</small>
+            <small class="form-text text-danger" *ngIf="editForm.get('cik')?.errors?.minlength">your cik must be 10 digit</small>
+              <small class="form-text text-danger" *ngIf="editForm.get('cik')?.errors?.pattern">no white space between</small>
+            <small class="frm-text text-danger" *ngIf="editForm.get('cik')?.errors?.maxlength">your cik number must not be greater than 10</small>
+
+          </div>
+
+
+        </div>
+<!--        <button (click)="check()">check</button>-->
+
+        <div class="form-group">
+          <label class="form-control-label" for="ccc">CCC</label>
+          <input style="width: 200px"
+                 type="text"
+                 class="form-control"
+                 name="ccc"
+                 id="ccc"
+                 data-cy="ccc"
+                 formControlName="ccc"
+                  #form  />
+          <div *ngIf="editForm.get('ccc')!.invalid && (editForm.get('ccc')!.dirty || editForm.get('ccc')!.touched)">
+            <small class ="form-text text-danger" *ngIf="editForm.get('ccc')?.errors?.required">you ccc required</small>
+            <small class="form-text text-danger" *ngIf="editForm.get('ccc')?.errors?.minlength">your ccc must be 8 digit</small>
+            <small class="form-text text-danger" *ngIf="editForm.get('ccc')?.errors?.pattern">no white space between</small>
+            <small class="form-text text-danger" *ngIf="editForm.get('ccc')?.errors?.pattern">no</small>
+            <small class="frm-text text-danger" *ngIf="editForm.get('ccc')?.errors?.maxlength">your ccc number must not be greater than 8</small>
+
+          </div>
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" for="field_cik">CIK</label>
-          <input style="width: 200px" type="text" class="form-control" name="cik" id="field_cik" data-cy="cik" formControlName="cik" />
-        </div>
+          <label  class="form-control-label " for="payment_amount">Payment Amount</label>
+          <span p style="margin-left: -125px;top: 40px; position: relative"  matPrefix>$&nbsp;</span>
 
-        <div class="form-group">
-          <label class="form-control-label" for="field_ccc">CCC</label>
-          <input style="width: 200px" type="text" class="form-control" name="ccc" id="field_ccc" data-cy="ccc" formControlName="ccc" />
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" for="field_payment_amount">Payment Amount</label>
           <input
             style="width: 200px"
             type="number"
+
             class="form-control"
             name="payment_amount"
-            id="field_payment_amount"
+            id="payment_amount"
             data-cy="payment_amount"
             formControlName="payment_amount"
+            #form
           />
-        </div>
+          <div *ngIf="editForm.get('payment_amount')!.invalid && (editForm.get('payment_amount')!.dirty || editForm.get('payment_amount')!.touched)">
+            <small class ="form-text text-danger" *ngIf="editForm.get('payment_amount')?.errors?.required">you payment amount required</small>
+<!--            <small class="form-text text-danger" *ngIf="editForm.get('payment_amount')?.errors?.pattern">must be in</small>-->
 
-        <div style="margin-top: 110px">
+          </div>
 
-        <div class="form-group">
-          <label class="form-control-label" for="field_name">Name</label>
-          <input style="width: 290px" type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
-        </div>
 
-        <div class="form-group">
-          <label class="form-control-label" for="field_email">Email</label>
-          <input style="width: 290px" type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
-        </div>
+          </div>
+
+
+        <div style="margin-top: 120px">
 
         <div class="form-group">
-          <label class="form-control-label" for="field_phone">Phone</label>
-          <input style="width: 290px" type="text" class="form-control" name="phone" id="field_phone" data-cy="phone" formControlName="phone" />
+          <label class="form-control-label" for="name">Name</label>
+          <input style="width: 290px"
+                 type="text"
+                 class="form-control"
+                 name="name"
+                 id="name"
+                 data-cy="name"
+                 formControlName="name"
+                 #form/>
+
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)"></div>
+          <small class ="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required">you name required</small>
+
+
+
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="email">Email</label>
+          <input style="width: 290px"
+                 type="text"
+                 class="form-control"
+                 name="email"
+                 id="email"
+                 data-cy="email"
+                 formControlName="email"
+          #form/>
+
+          <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)"></div>
+          <small class ="form-text text-danger" *ngIf="editForm.get('email')?.errors?.required">you email required</small>
+          <small class ="form-text text-danger" *ngIf="editForm.get('email')?.errors?.email">invalid email</small>
+
+
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="phone">Phone</label>
+          <input style="width: 290px"
+                 type="text"
+                 class="form-control"
+                 name="phone"
+                 id="phone"
+                 data-cy="phone"
+                 formControlName="phone"
+          #form/>
+
+          <div *ngIf="editForm.get('phone')!.invalid && (editForm.get('phone')!.dirty || editForm.get('phone')!.touched)"></div>
+          <small class ="form-text text-danger" *ngIf="editForm.get('phone')?.errors?.required">you phone required</small>
+          <small class ="form-text text-danger" *ngIf="editForm.get('phone')?.errors?.pattern">invalid phone</small>
+
         </div>
       </div>
 
       </div>
 
       <div>
-        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="clean()">
           <span>Clear</span>
         </button>
 
